@@ -24,7 +24,7 @@ Ensure you have the following installed:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/rawbinn/express-typescript-mongodb-starter.git
+   git clone https://github.com/rawbinn/Express.js-TypeScript-MongoDB-Starter.git
    cd express-typescript-mongodb-starter
    ```
 
