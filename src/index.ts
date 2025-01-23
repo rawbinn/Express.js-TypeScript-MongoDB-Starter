@@ -8,12 +8,10 @@ import 'dotenv/config';
 
 // Initialize the Express app
 const app: Application = express();
-const port = Number(process.env.PORT) || 3000;
+
 
 // Connect to the database
-const startServer = async () => {
-    await connectToDatabase();
-
+const startServer = () => {
     // Middleware
     app.use(cors({ origin: process.env.CORS_ORIGIN || '*' }));
     app.use(helmet());
@@ -27,8 +25,14 @@ const startServer = async () => {
     app.use(errorMiddleware);
 
     // Start listening
-    app.listen(port, () => {
-        console.log(`🚀 App listening on port ${port}`);
+    connectToDatabase().then(() => {
+        // Start the server after the database connection is established
+        const port = Number(process.env.PORT) || 3000;
+        app.listen(port, () => {
+            console.log(`🚀 App listening on port ${port}`);
+        });
+    }).catch((error) => {
+        console.error('Error connecting to the database:', error);
     });
 };
 
